@@ -51,8 +51,9 @@ function setup() {
     mv liberty/server2.xml liberty/server.xml
   fi
   
-  eval $(minikube docker-env) 
-  docker build -f Dockerfile.nojava -t web-api:1 .
+  #eval $(minikube docker-env) 
+  podman build -f Dockerfile.nojava -t web-api:1 .
+  podman push web-api:1 $(minikube ip):5000/web-api:1
 
   kubectl apply -f deployment/kubernetes-service.yaml
   kubectl apply -f deployment/kubernetes-deployment-v1.yaml

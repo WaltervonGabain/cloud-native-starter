@@ -52,8 +52,10 @@ function setup() {
   
   _out Build Docker Image
   cd ${root_folder}/authors-nodejs
-  eval $(minikube docker-env)
-  docker build -f Dockerfile -t  authors:1 .
+  #eval $(minikube docker-env)
+  podman build -f Dockerfile -t  authors:1 .
+  podman push authors:1 $(minikube ip):5000/authors:1
+
 
   _out Deploy to Minikube
   cd ${root_folder}/authors-nodejs/deployment

@@ -30,8 +30,9 @@ function setup() {
   
   configureVUEminikubeIP
 
-  eval $(minikube docker-env) 
-  docker build -f Dockerfile -t web-app:1 .
+  #eval $(minikube docker-env) 
+  podman build -f Dockerfile -t web-app:1 .
+  podman push web-app:1 $(minikube ip):5000/web-app:1
 
   kubectl apply -f deployment/kubernetes.yaml
   kubectl apply -f deployment/istio.yaml
